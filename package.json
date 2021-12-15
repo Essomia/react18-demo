@@ -1,12 +1,17 @@
 {
-  "name": "react18-demo",
+  "name": "react18-cookbook",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "Project to test new React 18 features and show differences on how the things are handled",
+  "keywords": [
+    "react",
+    "test",
+    "demo"
+  ],
   "main": "src/index.js",
   "dependencies": {
-    "react": "18.0.0-rc.0",
-    "react-dom": "18.0.0-rc.0",
+    "prop-types": "^15.7.2",
+    "react": "^18.0.0-rc.0",
+    "react-dom": "^18.0.0-rc.0",
     "react-scripts": "5.0.0"
   },
   "devDependencies": {

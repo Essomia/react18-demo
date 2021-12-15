@@ -1,0 +1,28 @@
+:root {
+    --base-color-white: #fefefe;
+    --base-color-gray-light: #d4d4d4;
+    --base-color-gray-dark: #5f5f5f;
+    --base-color-black: #1d1d1d;
+
+    --brand-color-primary-light: #2196f3;
+    --brand-color-primary-dark: #282c34;
+    --brand-color-secondary-light: #ff5252;
+}
+
+/* Header */
+
+.header {
+    padding: 2em 1em;
+    background: var(--brand-color-primary-dark);
+}
+
+.title {
+    margin: 0;
+    color: var(--brand-color-primary-light);
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.title > span {
+    color: var(--base-color-white);
+}
