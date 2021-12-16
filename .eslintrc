@@ -1,0 +1,32 @@
+{
+    "extends": ["airbnb", "airbnb/hooks", "eslint:recommended"],
+    "rules": {
+        "func-names": ["error", "never"],
+        "indent": "off",
+        "max-len": ["off"],
+        "no-restricted-globals": ["off"],
+        "react/function-component-definition": [
+            "error",
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+        ],
+        "react/no-danger": ["error"],
+        "react/react-in-jsx-scope": ["off"],
+        "react/static-property-placement": ["off"],
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [".ts", ".tsx", ".js", ".jsx"]
+            }
+        ],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-one-expression-per-line": ["off"],
+        "react/jsx-props-no-spreading": ["off"]
+    },
+    "globals": {
+        "document": "readonly"
+    }
+}
