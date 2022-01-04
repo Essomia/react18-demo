@@ -1,10 +1,22 @@
 import { StrictMode } from 'react';
 import { bool, number } from 'prop-types';
 
+// import AutomaticBatching from '../components/automaticBatching';
+// import DeferredValue from '../components/deferredValue';
+// import StartTransition from '../components/startTransition';
+// import Suspense from '../components/suspense';
+
 import './App.css';
 
 const App = ({ rootAPI, enableStrict }) => {
     console.log('[R18D]', 'Activate Root API for React with following value:', { rootAPI, enableStrict });
+
+    // const childs = [
+    //     <AutomaticBatching key={`${rootAPI}-batching`} />,
+    //     <DeferredValue key={`${rootAPI}-batching`} />,
+    //     <StartTransition key={`${rootAPI}-batching`} />,
+    //     <Suspense key={`${rootAPI}-batching`} />,
+    // ];
 
     const childs = '';
 
