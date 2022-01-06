@@ -8,6 +8,10 @@ import { bool, number } from 'prop-types';
 
 import './App.css';
 
+/**
+ * @topic - Strict Mode
+ */
+
 const App = ({ rootAPI, enableStrict }) => {
     console.log('[R18D]', 'Activate Root API for React with following value:', { rootAPI, enableStrict });
 
