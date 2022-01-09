@@ -101,14 +101,23 @@ Concurrent Mode is gone! Now it's Concurrent Features for a better performance e
 
 ### SSR Adoption plan
 
-A little reminder on how SSR (Server-Side Rendering) works ?
+A little reminder on how SSR (Server-Side Rendering) works:
 
--   On the server side:
-    -   data is fetched for each component.
-    -   the entire app is rendered to HTML and sent to the client.
 -   On the client side:
-    -   the JavaScript code for the entire app is fetched.
-    -   the JavaScript connects React to the server-generated HTML, which is known as Hydration.
+    - Browser receives a request for a page.
+    - Server sends HTML, CSS and, JS code to the browser.
+    - Client load script and render React App.
+    - Client fetch datas.
+    - React App becomes interactive.
+-   On the server side:
+    - Browser receives a request for a page.
+    - Server fetch datas for the entire application.
+    - Server render all React components to HTML.
+    - Server send HTML to the browser.
+    - Users can see the content of the React App.
+
+![render-client-side](./misc/rendering-client-side.png)
+![render-server-side](./misc/rendering-server-side.png)
 
 During the React Conf 2021, the React teams shared their vision for Suspense and Server Components adoption for the next versions for better SSR support (_work in progress_):
 
