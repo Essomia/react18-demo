@@ -4,7 +4,7 @@
 
 Upgrade has been made easy since React 17, so minimal changes to the application needed to upgrade (could be done in an afternoon).
 
-Start by updating packages to latest version:
+Start by updating packages to the latest version:
 
 ```
 npm install react@rc react-dom@rc
@@ -58,25 +58,24 @@ Check the [latest available version on NPM,](https://www.npmjs.com/package/react
 -   Can be use wherever network calls or render-blocking processes are present.
 
 -   Helps to keep the current webpage responsive and being able to do heavy non-blocking UI updates at the same time.
--   Allows to differentiate between quick updates and delayed updates:
+-   Allows differentiating between quick updates and delayed updates:
     -   Quick update (urgent): `setText(input)`
     -   Delayed update (non-urgent): `startTransition(() => { setText(input); });`
 -   Avoid to use `debounce` and we don't need to play with timer.
 -   Optimize usage of memory for rendering time.
     -   See an [example of startTransition impact on performance made by Swizec](https://react-fractals-git-react-18-swizec.vercel.app/).
--   `useTransition` allow to show a loader whild transition is pending. It help to indicate app is still processing their imput.
+-   `useTransition` allow showing a loader while transition is pending. It helps to indicate the app is still processing their input.
 
-**Example:** A user starts typing in a search box. The input value has to be immediately updated while the search results could wait few milliseconds (as expected by the user).
+**Example:** A user starts typing in a search box. The input value has to be immediately updated, while the search results could wait few milliseconds (as expected by the user).
 
 ### Refine APIs
 
 #### useId()
 
-- Generating a single and unique IDs on both the client and server rendering (on hydration mode) and outside of server-rendered content, it falls back to a global counter ID.
-- Help to support accessibility (since these APIs are heavily based on unique IDs to link components together).
+-   Generating a single and unique IDs on both the client and server rendering (on hydration mode) and outside server-rendered content, it falls back to a global counter ID.
+-   Help to support accessibility (since these APIs are heavily based on unique IDs to link components together).
 
 **Reminder:** With React 17, we used to generate IDs wherever needed using `Math.random()`. However, server-side rendering makes it complicated due to ID mismatch between client and server.
-
 
 #### useDeferredvalue()
 
@@ -87,7 +86,7 @@ Check the [latest available version on NPM,](https://www.npmjs.com/package/react
 #### useSyncExternalStore()
 
 -   New API for `useMutableSource()`.
-- Mainly use by library (so no need to dive in).
+-   Mainly use by library (so no need to dive in).
 
 ## Concepts
 
@@ -100,7 +99,7 @@ Concurrent Mode is gone! Now it's Concurrent Features for a better performance e
 -   Control invocation order to give some control to the user via the Transition API.
 -   Concurrent Feature include:
     -   Root API: `createRoot` to enable new concurrency features supports.
-    -   Transition API: `startTransition` to specity priority of rendering.
+    -   Transition API: `startTransition` to specify priority of rendering.
     -   Suspense API: `<Suspense />` to streaming server render and selective hydration.
 
 ### SSR Adoption plan
@@ -108,17 +107,17 @@ Concurrent Mode is gone! Now it's Concurrent Features for a better performance e
 A little reminder on how SSR (Server-Side Rendering) works:
 
 -   On the client side:
-    - Browser receives a request for a page.
-    - Server sends HTML, CSS and, JS code to the browser.
-    - Client load script and render React App.
-    - Client fetch datas.
-    - React App becomes interactive.
+    -   Browser receives a request for a page.
+    -   Server sends HTML, CSS and, JS code to the browser.
+    -   Client load script and render React App.
+    -   Client fetch datas.
+    -   React App becomes interactive.
 -   On the server side:
-    - Browser receives a request for a page.
-    - Server fetch datas for the entire application.
-    - Server render all React components to HTML.
-    - Server send HTML to the browser.
-    - Users can see the content of the React App.
+    -   Browser receives a request for a page.
+    -   Server fetch datas for the entire application.
+    -   Server render all React components to HTML.
+    -   Server send HTML to the browser.
+    -   Users can see the content of the React App.
 
 ![render-client-side](./misc/rendering-client-side.png)
 ![render-server-side](./misc/rendering-server-side.png)
