@@ -17,9 +17,9 @@ Check the [latest available version on NPM,](https://www.npmjs.com/package/react
 ### Root API
 
 -   Shipped with the Legacy Root API and the new Root API with `ReactDOM.createRoot`.
--   Include improvements "out of the box" and allow concurrent mode features.
 -   Remove the `ReactDOM.hydrate` method and move hydration config to the top-level component.
 -   `ReactDOM.render` of the new Root API does not support the second callback argument. To execute a side effect after rendering, declare it in a component body with `useEffect()`.
+-   Include improvements "out of the box" and allow concurrent mode features.
 
 ### Strict Mode (with Strict Effect)
 
@@ -53,27 +53,30 @@ Check the [latest available version on NPM,](https://www.npmjs.com/package/react
 
 **Reminder:** With React 17, we needed to charge the entire page before it could start hydrating components.
 
----
-
 ### Transition API - startTransition() and useTransition()
 
 -   Can be use wherever network calls or render-blocking processes are present.
 
 -   Helps to keep the current webpage responsive and being able to do heavy non-blocking UI updates at the same time.
-    -   Ex: A user starts typing in a search box. The input value has to be immediately updated while the search results could wait few milliseconds (as expected by the user).
 -   Allows to differentiate between quick updates and delayed updates:
     -   Quick update (urgent): `setText(input)`
     -   Delayed update (non-urgent): `startTransition(() => { setText(input); });`
--   Need to identify which updates are important and which are not.
 -   Avoid to use `debounce` and we don't need to play with timer.
 -   Optimize usage of memory for rendering time.
-    -   See an example of startTransition impact on performance here: https://react-fractals-git-react-18-swizec.vercel.app/
-    -   [RWG#65 - Real world example: adding startTransition for slow renders.](https://github.com/reactwg/react-18/discussions/65)
+    -   See an [example of startTransition impact on performance made by Swizec](https://react-fractals-git-react-18-swizec.vercel.app/).
 -   `useTransition` allow to show a loader whild transition is pending. It help to indicate app is still processing their imput.
 
-### Refine new APIs
+**Example:** A user starts typing in a search box. The input value has to be immediately updated while the search results could wait few milliseconds (as expected by the user).
+
+### Refine APIs
 
 #### useId()
+
+- Generating a single and unique IDs on both the client and server rendering (on hydration mode) and outside of server-rendered content, it falls back to a global counter ID.
+- Help to support accessibility (since these APIs are heavily based on unique IDs to link components together).
+
+**Reminder:** With React 17, we used to generate IDs wherever needed using `Math.random()`. However, server-side rendering makes it complicated due to ID mismatch between client and server.
+
 
 #### useDeferredvalue()
 
@@ -81,9 +84,10 @@ Check the [latest available version on NPM,](https://www.npmjs.com/package/react
     -   Ex: A sort/filter button that update the state of a large list.
     -   Ex: A text input field that can be immediately rendered to the screen, but a component that take a `useDeferredValue` and returns a `defferedText` which lags by 3 seconds. This results in delaying the Card Lists component while still allowing users to have the text field feel snappy.
 
-#### useSyncExternalStore() (<-- useMutableSource())
+#### useSyncExternalStore()
 
--   New Store Selector for mutable source (= sync external store)
+-   New API for `useMutableSource()`.
+- Mainly use by library (so no need to dive in).
 
 ## Concepts
 
