@@ -53,7 +53,7 @@ Check the [latest available version on NPM,](https://www.npmjs.com/package/react
 
 **Reminder:** With React 17, we needed to charge the entire page before it could start hydrating components.
 
-### Transition API - startTransition() and useTransition()
+### Transition - startTransition() and useTransition()
 
 -   Can be use wherever network calls or render-blocking processes are present.
 
