@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import fetch from 'node-fetch';
 
 /**
  * @topic - Automatic Batching
@@ -26,8 +25,9 @@ const DemoAutomaticBatching = () => {
         setToggleFeature(!toggleFeature);
     }, [countRenderForHooks, toggleFeature]);
 
-    const onClickFetchHandler = () => {
-        fetch('https://jsonplaceholder.typicode.com/todos/18').then(() => {
+    const onClickFetchHandler = async () => {
+        // eslint-disable-next-line no-undef
+        await fetch('https://jsonplaceholder.typicode.com/todos/18').then(() => {
             setCountRenderForPromise(countRenderForPromise + 1);
             setToggleFeature(!toggleFeature);
         });

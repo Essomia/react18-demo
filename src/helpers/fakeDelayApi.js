@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 function wrapPromise(promise, delay) {
     let status = 'pending';
     let result;
@@ -33,6 +31,7 @@ function wrapPromise(promise, delay) {
 }
 
 async function fetchUrl(url) {
+    // eslint-disable-next-line no-undef
     const response = await fetch(url);
     const datas = await response.json();
 
