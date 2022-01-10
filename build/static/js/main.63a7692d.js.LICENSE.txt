@@ -15,7 +15,7 @@ object-assign
  */
 
 /** @license React vundefined
- * react-dom.production.min.js
+ * react-dom.profiling.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
