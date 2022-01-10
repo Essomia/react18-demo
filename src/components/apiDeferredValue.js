@@ -28,10 +28,10 @@ const MySlowList = memo(({ text }) => {
         return null;
     }
 
-    for (let i = 0; i < 50; i += 1) {
+    for (let i = 0; i < 1000; i += 1) {
         items.push(
             <ListItem key={i}>
-                <p>{`Result #${i} for "${text}"`}</p>
+                <li>{`Result #${i} for "${text}"`}</li>
             </ListItem>,
         );
     }
@@ -64,7 +64,9 @@ const DemoDeferedValue = () => {
 
     return (
         <section>
-            <h3 className="head">useDeferredValue</h3>
+            <h3 id="usedeferredvalue" className="head">
+                useDeferredValue
+            </h3>
 
             <div className="row">
                 <input value={text} onChange={onClickHandler} />

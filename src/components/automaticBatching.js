@@ -35,7 +35,7 @@ const DemoAutomaticBatching = () => {
 
     return (
         <section>
-            <h3 className="head">
+            <h3 id="automaticbatching" className="head">
                 Automatic Batching
                 <span className="render-count">{counterRender}</span>
             </h3>
