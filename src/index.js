@@ -6,22 +6,22 @@ import App from './pages/App';
 import './index.css';
 
 /**
- * @topic - New Root API
+ * @topic - Root API
  */
 
+const rootElement = document.getElementById('root');
+
 //
-// RootAPI for React 17 (before)
+// React 17 (before)
 //
 
-// const rootElement = document.getElementById('root');
 // ReactDOM.hydrate(<App rootAPI={17} />, rootElement);
 // ReactDOM.render(<App rootAPI={17} />, rootElement);
 
 //
-// RootAPI for React 18 (after)
+// React 18 (after)
 //
 
-const rootElement = document.getElementById('root');
 const rootApp = ReactDOM.createRoot(rootElement, { hydrate: false });
 
 rootApp.render(<App rootAPI={18} />);

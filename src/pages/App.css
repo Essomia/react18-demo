@@ -12,7 +12,7 @@
 /* Header */
 
 .header {
-    padding: 2em 1em;
+    padding: 2rem 1rem;
     background: var(--brand-color-primary-dark);
 }
 
@@ -25,4 +25,30 @@
 
 .title > span {
     color: var(--base-color-white);
+}
+
+.head {
+    margin: 0;
+    padding: 1rem;
+    border-top: 1px solid var(--base-color-gray-light);
+    border-bottom: 1px solid var(--base-color-gray-light);
+    background: var(--base-color-gray-dark);
+    color: var(--brand-color-secondary-light);
+    font-size: 1.75em;
+    font-weight: bold;
+}
+
+.row {
+    padding: 1rem;
+}
+
+button {
+    appearance: none;
+    padding: 0.5em 1em;
+    border: 2px solid var(--base-color-white);
+    background: var(--base-color-black);
+    color: var(--base-color-white);
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: capitalize;
 }
