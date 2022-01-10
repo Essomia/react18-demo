@@ -8,7 +8,9 @@ import { Loading, DemoUser, DemoPosts } from '../helpers/demoContent';
 
 const DemoSuspense = () => (
     <section>
-        <h3 className="head">Suspense</h3>
+        <h3 id="suspense" className="head">
+            Suspense
+        </h3>
         <div className="row">
             <Suspense fallback={<Loading type="user" />}>
                 <DemoUser />

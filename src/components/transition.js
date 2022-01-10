@@ -22,9 +22,11 @@ const DemoTransition = () => {
 
     return (
         <section>
-            <h3 className="head">Transition</h3>
+            <h3 id="transition" className="head">
+                Transition
+            </h3>
             <div className="row">
-                <button disabled={isTransiting} onClick={onClickHandler}>
+                <button type="button" disabled={isTransiting} onClick={onClickHandler}>
                     Load next post
                 </button>
 

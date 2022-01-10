@@ -25,8 +25,9 @@ const DemoAutomaticBatching = () => {
         setToggleFeature(!toggleFeature);
     }, [countRenderForHooks, toggleFeature]);
 
-    const onClickFetchHandler = () => {
-        fetch('https://jsonplaceholder.typicode.com/todos/18').then(() => {
+    const onClickFetchHandler = async () => {
+        // eslint-disable-next-line no-undef
+        await fetch('https://jsonplaceholder.typicode.com/todos/18').then(() => {
             setCountRenderForPromise(countRenderForPromise + 1);
             setToggleFeature(!toggleFeature);
         });
@@ -34,7 +35,7 @@ const DemoAutomaticBatching = () => {
 
     return (
         <section>
-            <h3 className="head">
+            <h3 id="automaticbatching" className="head">
                 Automatic Batching
                 <span className="render-count">{counterRender}</span>
             </h3>
@@ -52,19 +53,19 @@ const DemoAutomaticBatching = () => {
                 </div>
                 <div className="cell">
                     <p>
-                        <span class="label">Count Render Plain</span>
+                        <span className="label">Count Render Plain</span>
                         <span className="render-count">{countRenderPlain}</span>
                     </p>
                     <p>
-                        <span class="label">Count Render Hooks</span>
+                        <span className="label">Count Render Hooks</span>
                         <span className="render-count">{countRenderForHooks}</span>
                     </p>
                     <p>
-                        <span class="label">Count Render Fetch</span>
+                        <span className="label">Count Render Fetch</span>
                         <span className="render-count">{countRenderForPromise}</span>
                     </p>
                     <p>
-                        <span class="label">Toggle Feature</span>
+                        <span className="label">Toggle Feature</span>
                         <span className="render-count">{toggleFeature.toString()}</span>
                     </p>
                 </div>

@@ -1,8 +1,8 @@
 import { useDeferredValue, useState, memo } from 'react';
-// import { useDebounce } from "use-debounce";
+import { shape, string } from 'prop-types';
 
 const ListItem = ({ children }) => {
-    let now = performance.now();
+    const now = performance.now();
 
     while (performance.now() - now < 1) {
         // Note: this is an INTENTIONALLY EMPTY loop that
@@ -17,13 +17,21 @@ const ListItem = ({ children }) => {
     return <div className="ListItem">{children}</div>;
 };
 
-const MySlowList = memo(({ text }) => {
-    let items = [];
+ListItem.propTypes = {
+    children: shape(),
+};
 
-    for (let i = 0; i < 50; i++) {
+const MySlowList = memo(({ text }) => {
+    const items = [];
+
+    if (!text) {
+        return null;
+    }
+
+    for (let i = 0; i < 1000; i += 1) {
         items.push(
             <ListItem key={i}>
-                Result #{i} for "{text}"
+                <li>{`Result #${i} for "${text}"`}</li>
             </ListItem>,
         );
     }
@@ -31,13 +39,17 @@ const MySlowList = memo(({ text }) => {
     return (
         <>
             <p>
-                <b>Results for "{text}":</b>
+                <b>{`Results for ${text}:`}</b>
             </p>
 
             <ul className="List">{items}</ul>
         </>
     );
 });
+
+MySlowList.propTypes = {
+    text: string,
+};
 
 const DemoDeferedValue = () => {
     const [text, setText] = useState('hello');
@@ -46,15 +58,15 @@ const DemoDeferedValue = () => {
         timeoutMs: 5000,
     });
 
-    // const deferredText = useDebounce(text, 5000);
-
     const onClickHandler = (event) => {
         setText(event.target.value);
     };
 
     return (
         <section>
-            <h3 className="head">useDeferredValue</h3>
+            <h3 id="usedeferredvalue" className="head">
+                useDeferredValue
+            </h3>
 
             <div className="row">
                 <input value={text} onChange={onClickHandler} />

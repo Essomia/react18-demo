@@ -5,7 +5,9 @@ const DemoUseId = () => {
 
     return (
         <section>
-            <h3 className="head">UseId</h3>
+            <h3 id="useid" className="head">
+                useId
+            </h3>
             <div className="row">
                 <div className="field">
                     <label htmlFor={`${uniqueId}-name`}>Name</label>

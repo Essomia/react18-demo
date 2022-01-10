@@ -2,7 +2,7 @@ function wrapPromise(promise, delay) {
     let status = 'pending';
     let result;
 
-    let suspender = promise.then(
+    const suspender = promise.then(
         (r) => {
             setTimeout(() => {
                 status = 'success';
@@ -24,11 +24,14 @@ function wrapPromise(promise, delay) {
             } else if (status === 'success') {
                 return result;
             }
+
+            return null;
         },
     };
 }
 
 async function fetchUrl(url) {
+    // eslint-disable-next-line no-undef
     const response = await fetch(url);
     const datas = await response.json();
 
@@ -36,7 +39,7 @@ async function fetchUrl(url) {
 }
 
 export default function fetchWrapper(url, delay = 1000) {
-    let promise = fetchUrl(url);
+    const promise = fetchUrl(url);
 
     return wrapPromise(promise, delay);
 }
