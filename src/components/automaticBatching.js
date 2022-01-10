@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import fetch from 'node-fetch';
 
 /**
  * @topic - Automatic Batching
@@ -52,19 +53,19 @@ const DemoAutomaticBatching = () => {
                 </div>
                 <div className="cell">
                     <p>
-                        <span class="label">Count Render Plain</span>
+                        <span className="label">Count Render Plain</span>
                         <span className="render-count">{countRenderPlain}</span>
                     </p>
                     <p>
-                        <span class="label">Count Render Hooks</span>
+                        <span className="label">Count Render Hooks</span>
                         <span className="render-count">{countRenderForHooks}</span>
                     </p>
                     <p>
-                        <span class="label">Count Render Fetch</span>
+                        <span className="label">Count Render Fetch</span>
                         <span className="render-count">{countRenderForPromise}</span>
                     </p>
                     <p>
-                        <span class="label">Toggle Feature</span>
+                        <span className="label">Toggle Feature</span>
                         <span className="render-count">{toggleFeature.toString()}</span>
                     </p>
                 </div>

@@ -5,6 +5,8 @@
         "indent": "off",
         "max-len": ["off"],
         "no-restricted-globals": ["off"],
+        "jsx-a11y/label-has-associated-control": ["off"],
+        "react/require-default-props": ["off"],
         "react/function-component-definition": [
             "error",
             {

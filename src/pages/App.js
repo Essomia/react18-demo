@@ -17,11 +17,11 @@ const App = ({ rootAPI, enableStrict }) => {
     console.log('[R18D]', 'Activate Root API for React with following value:', { rootAPI, enableStrict });
 
     const childs = [
-        <AutomaticBatching key={`automatic-batching`} />,
-        <Suspense key={`suspense`} />,
-        <Transition key={`transition`} />,
-        <ApiUseDeferredValue key={`use-deferred-value`} />,
-        <ApiUseId key={`use-id`} />,
+        <AutomaticBatching key="automatic-batching" />,
+        <Suspense key="suspense" />,
+        <Transition key="transition" />,
+        <ApiUseDeferredValue key="use-deferred-value" />,
+        <ApiUseId key="use-id" />,
     ];
 
     if (enableStrict) {
