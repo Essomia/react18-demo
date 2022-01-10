@@ -1,64 +1,34 @@
 import { useCallback, useState } from 'react';
 
-function fetchSomething(delay = 1000, error = false) {
-    return new Promise((resolve, reject) => {
-        if (error) {
-            setTimeout(reject, delay);
-        } else {
-            setTimeout(resolve, delay);
-        }
-    });
-}
-
-let counterRender = 0;
-
 /**
  * @topic - Automatic Batching
  */
 
-const AutomaticBatching = () => {
+let counterRender = 0;
+
+const DemoAutomaticBatching = () => {
     counterRender += 1;
 
-    console.log(
-        '[R18D]',
-        'With StrictMode, the logging should be doubled since StrictMode double-invokes effects (eg: mount -> unmount -> mount).',
-    );
+    const [countRenderPlain, setCountRenderPlain] = useState(0);
+    const [countRenderForHooks, setCountRenderForHooks] = useState(0);
+    const [countRenderForPromise, setCountRenderForPromise] = useState(0);
 
-    //
-    // Automatic Batching with plain function
-    //
-
-    const [countValue, setCountValue] = useState(0);
     const [toggleFeature, setToggleFeature] = useState(false);
 
     const onClickHandler = () => {
-        setCountValue(countValue + 1);
+        setCountRenderPlain(countRenderPlain + 1);
         setToggleFeature(!toggleFeature);
     };
 
-    //
-    // Automatic Batching with Hooks
-    //
-
-    const [countValueByHooks, setCountValueByHooks] = useState(0);
-    const [toggleFeatureByHooks, setToggleFeatureByHooks] = useState(false);
-
     const onClickHooksHandler = useCallback(() => {
-        setCountValueByHooks(countValueByHooks + 1);
-        setToggleFeatureByHooks(!toggleFeatureByHooks);
-    }, [countValueByHooks, toggleFeatureByHooks]);
+        setCountRenderForHooks(countRenderForHooks + 1);
+        setToggleFeature(!toggleFeature);
+    }, [countRenderForHooks, toggleFeature]);
 
-    //
-    // Automatic Batching for Promise/Fetch
-    //
-
-    const [countValueByPromise, setCountValueByPromise] = useState(0);
-    const [toggleFeatureByPromise, setToggleFeatureByPromise] = useState(false);
-
-    const onClickPromiseHandler = () => {
-        fetchSomething().then(() => {
-            setCountValueByPromise(countValueByPromise + 1);
-            setToggleFeatureByPromise(!toggleFeatureByPromise);
+    const onClickFetchHandler = () => {
+        fetch('https://jsonplaceholder.typicode.com/todos/18').then(() => {
+            setCountRenderForPromise(countRenderForPromise + 1);
+            setToggleFeature(!toggleFeature);
         });
     };
 
@@ -69,48 +39,33 @@ const AutomaticBatching = () => {
                 <span className="render-count">{counterRender}</span>
             </h3>
             <div className="row">
-                {/* // Automatic Batching with plain function */}
-                <div className="cell centered">
+                <div className="cell">
                     <button type="button" onClick={onClickHandler}>
-                        Update datas with plain function
+                        Action Plain Update
                     </button>
-                    <p>
-                        Count Click
-                        <span className="render-count">{countValue}</span>
-                    </p>
-                    <p>
-                        Toggle Feature
-                        <span className="render-count">{toggleFeature.toString()}</span>
-                    </p>
-                </div>
-
-                {/* // Automatic Batching with Hooks */}
-                <div className="cell centered">
                     <button type="button" onClick={onClickHooksHandler}>
-                        Update datas with Hooks
+                        Action Hooks Update
                     </button>
-                    <p>
-                        Count Click For Hooks
-                        <span className="render-count">{countValueByHooks}</span>
-                    </p>
-                    <p>
-                        Toggle Feature For Hooks
-                        <span className="render-count">{toggleFeatureByHooks.toString()}</span>
-                    </p>
+                    <button type="button" onClick={onClickFetchHandler}>
+                        Action Fetch Update
+                    </button>
                 </div>
-
-                {/* // Automatic Batching for Promise/Fetch */}
-                <div className="cell centered">
-                    <button type="button" onClick={onClickPromiseHandler}>
-                        Update datas with Promise
-                    </button>
+                <div className="cell">
                     <p>
-                        Count Click For Promise
-                        <span className="render-count">{countValueByPromise}</span>
+                        <span class="label">Count Render Plain</span>
+                        <span className="render-count">{countRenderPlain}</span>
                     </p>
                     <p>
-                        Toggle Feature For Promise
-                        <span className="render-count">{toggleFeatureByPromise.toString()}</span>
+                        <span class="label">Count Render Hooks</span>
+                        <span className="render-count">{countRenderForHooks}</span>
+                    </p>
+                    <p>
+                        <span class="label">Count Render Fetch</span>
+                        <span className="render-count">{countRenderForPromise}</span>
+                    </p>
+                    <p>
+                        <span class="label">Toggle Feature</span>
+                        <span className="render-count">{toggleFeature.toString()}</span>
                     </p>
                 </div>
             </div>
@@ -118,4 +73,4 @@ const AutomaticBatching = () => {
     );
 };
 
-export default AutomaticBatching;
+export default DemoAutomaticBatching;

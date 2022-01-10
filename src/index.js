@@ -6,7 +6,7 @@ import App from './pages/App';
 import './index.css';
 
 /**
- * @topic - New Root API
+ * @topic - Root API
  */
 
 const rootElement = document.getElementById('root');

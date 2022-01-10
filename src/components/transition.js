@@ -1,72 +1,39 @@
-/* eslint-disable camelcase, react/prop-types */
-import {
- useState, useTransition, Suspense, unstable_useCacheRefresh,
-} from 'react';
+import { Suspense, useState, useTransition } from 'react';
 
-import { fetch } from 'react-fetch';
+import { getNextPost, Loading, DemoPost } from '../helpers/demoContent';
 
-const Picker = ({ value, onChange, options }) => (
-    <select onChange={(event) => onChange(event.target.value)} value={value}>
-        {options.map((option) => (
-            <option value={option} key={option}>
-                {option}
-            </option>
-        ))}
-    </select>
-);
+/**
+ * @topic - Transition
+ */
 
-const Posts = ({ subreddit }) => {
-    const json = fetch(`https://www.reddit.com/r/${subreddit}.json`).json();
-    const posts = json.data.children.map((child) => child.data);
+let postId = 1;
 
-    return (
-        <ul>
-            {posts.map((post) => (
-                <li key={post.id}>{post.title}</li>
-            ))}
-        </ul>
-    );
-};
-
-const App = () => {
-    const [subreddit, setSubreddit] = useState('reactjs');
-    const refresh = unstable_useCacheRefresh();
-
-    const [isPending, startTransition] = useTransition();
-
-    // // Urgent: Show what was typed
-    // setInputValue(input);
-
-    // // Mark any state updates inside as transitions
-    // startTransition(() => {
-    //     // Transition: Show the results
-    //     setSearchQuery(input);
-    // });
+const DemoTransition = () => {
+    const [content, setContent] = useState(getNextPost(postId));
+    const [isTransiting, startTransition] = useTransition();
 
     const onClickHandler = () => {
         startTransition(() => {
-            refresh();
+            postId = postId >= 100 ? 1 : postId + 1;
+
+            setContent(getNextPost(postId));
         });
     };
 
-    if (isPending) {
-        return 'Loading...';
-    }
-
     return (
-        <>
-            <Picker value={subreddit} onChange={setSubreddit} options={['reactjs', 'frontend']} />
-            <button type="button" onClick={onClickHandler}>
-                Refresh
-            </button>
+        <section>
+            <h3 className="head">Transition</h3>
+            <div className="row">
+                <button disabled={isTransiting} onClick={onClickHandler}>
+                    Load next post
+                </button>
 
-            <div style={{ opacity: isPending ? 0.5 : 1 }}>
-                <Suspense fallback={<h1>Loading...</h1>}>
-                    <Posts subreddit={subreddit} />
+                <Suspense fallback={<Loading type="post" />}>
+                    <DemoPost resource={content} isTransiting={isTransiting} />
                 </Suspense>
             </div>
-        </>
+        </section>
     );
 };
 
-export default App;
+export default DemoTransition;

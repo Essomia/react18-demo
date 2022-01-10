@@ -21,3 +21,9 @@ div,
 p {
     overflow: auto;
 }
+
+label,
+.label {
+    display: block;
+    font-weight: bold;
+}

@@ -1,34 +1,24 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
-import fetchProfileData from './fakeApi';
+import { Loading, DemoUser, DemoPosts } from '../helpers/demoContent';
 
-const resource = fetchProfileData();
+/**
+ * @topic - Suspense
+ */
 
-const ProfileDetails = () => {
-    // Try to read user info, although it might not have loaded yet
-    const user = resource.user.read();
-    return <h1>{user.name}</h1>;
-};
+const DemoSuspense = () => (
+    <section>
+        <h3 className="head">Suspense</h3>
+        <div className="row">
+            <Suspense fallback={<Loading type="user" />}>
+                <DemoUser />
 
-const ProfileTimeline = () => {
-    // Try to read posts, although they might not have loaded yet
-    const posts = resource.posts.read();
-    return (
-        <ul>
-            {posts.map((post) => (
-                <li key={post.id}>{post.text}</li>
-            ))}
-        </ul>
-    );
-};
-
-const ProfilePage = () => (
-    <Suspense fallback={<h1>Loading profile...</h1>}>
-        <ProfileDetails />
-        <Suspense fallback={<h1>Loading posts...</h1>}>
-            <ProfileTimeline />
-        </Suspense>
-    </Suspense>
+                <Suspense fallback={<Loading type="posts" />}>
+                    <DemoPosts />
+                </Suspense>
+            </Suspense>
+        </div>
+    </section>
 );
 
-export default ProfilePage;
+export default DemoSuspense;

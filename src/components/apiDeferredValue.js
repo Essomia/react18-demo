@@ -1,43 +1,67 @@
-/* eslint-disable react/prop-types */
-import { useState, useDeferredValue } from 'react';
+import { useDeferredValue, useState, memo } from 'react';
+// import { useDebounce } from "use-debounce";
 
-import { fetch } from 'react-fetch';
+const ListItem = ({ children }) => {
+    let now = performance.now();
 
-const PostsList = ({ text }) => {
-    const subreddit = 'reactjs';
-    const json = fetch(`https://www.reddit.com/r/${subreddit}.json`).json();
-    const posts = json.data.children.map((child) => child.data);
+    while (performance.now() - now < 1) {
+        // Note: this is an INTENTIONALLY EMPTY loop that
+        // DOES NOTHING for 3 milliseconds for EACH ITEM.
+        //
+        // It's meant to emulate what happens in a deep
+        // component tree with calculations and other
+        // work performed inside components that can't
+        // trivially be optimized or removed.
+    }
 
-    if (text) {
-        return <p>{text}</p>;
+    return <div className="ListItem">{children}</div>;
+};
+
+const MySlowList = memo(({ text }) => {
+    let items = [];
+
+    for (let i = 0; i < 50; i++) {
+        items.push(
+            <ListItem key={i}>
+                Result #{i} for "{text}"
+            </ListItem>,
+        );
     }
 
     return (
-        <ul>
-            {posts.map((post) => (
-                <li key={post.id}>{post.title}</li>
-            ))}
-        </ul>
+        <>
+            <p>
+                <b>Results for "{text}":</b>
+            </p>
+
+            <ul className="List">{items}</ul>
+        </>
     );
-};
+});
 
-const App = () => {
+const DemoDeferedValue = () => {
     const [text, setText] = useState('hello');
-    const deferredText = useDeferredValue(text, { timeoutMs: 2000 });
 
-    const handleChange = (value) => {
-        setText(value);
+    const deferredText = useDeferredValue(text, {
+        timeoutMs: 5000,
+    });
+
+    // const deferredText = useDebounce(text, 5000);
+
+    const onClickHandler = (event) => {
+        setText(event.target.value);
     };
 
     return (
-        <div className="App">
-            {/* Keep passing the current text to the input */}
-            <input value={text} onChange={handleChange} />
+        <section>
+            <h3 className="head">useDeferredValue</h3>
 
-            {/* But the list is allowed to "lag behind" when necessary */}
-            <PostsList text={deferredText} />
-        </div>
+            <div className="row">
+                <input value={text} onChange={onClickHandler} />
+                <MySlowList text={deferredText} />
+            </div>
+        </section>
     );
 };
 
-export default App;
+export default DemoDeferedValue;
