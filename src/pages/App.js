@@ -17,7 +17,7 @@ const App = ({ rootAPI, enableStrict }) => {
     console.log('[R18D]', 'Activate Root API for React with following value:', { rootAPI, enableStrict });
 
     const childs = [
-        <div className="menu">
+        <div key="menu" className="menu">
             <a className="item" href="#automaticbatching">
                 Automatic Batching
             </a>
