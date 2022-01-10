@@ -1,0 +1,10 @@
+{
+    "name": "React 18 Demo",
+    "short_name": "R18D",
+    "theme_color": "#2196f3",
+    "background_color": "#2196f3",
+    "display": "browser",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/"
+}
