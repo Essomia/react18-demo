@@ -29,4 +29,5 @@ The demo you can see at http://localhost:3000 will allow you to compare side-by-
 -   Legacy Root API for React 17
 -   New Root API for React 18
 
+
 Read more in the [notes about React 18 new features](./UPGRADE.md).
